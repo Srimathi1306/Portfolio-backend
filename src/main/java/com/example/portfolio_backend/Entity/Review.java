@@ -6,19 +6,19 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Activity {
+public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy =
+            GenerationType.IDENTITY)
+
     private Long id;
 
     @NotBlank
-    private String title;
+    private String reviewer;
 
     @Column(length = 1000)
-    private String content;
+    private String comment;
 
-    private String date;
-
-    private boolean featured;
+    private String role;
 }

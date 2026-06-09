@@ -21,6 +21,11 @@ public class ProjectController {
         return projectService.getAllProjects();
     }
 
+    @GetMapping("/featured")
+    public List<Project> getFeaturedProjects() {
+        return projectService.getFeaturedProjects();
+    }
+
     @PostMapping
     public Project addProject(@Valid @RequestBody Project project){
         return projectService.addProject(project);

@@ -18,6 +18,9 @@ public class ActivityService {
     public List<Activity> getAllActivities() {
         return activityRepository.findAllByOrderByIdDesc();
     }
+    public List<Activity> getFeaturedActivities() {
+        return activityRepository.findByFeaturedTrueOrderByIdDesc();
+    }
 
     public Activity addActivity(Activity activity) {
         return activityRepository.save(activity);
@@ -30,6 +33,7 @@ public class ActivityService {
         existingActivity.setTitle(updatedActivity.getTitle());
         existingActivity.setContent(updatedActivity.getContent());
         existingActivity.setDate(updatedActivity.getDate());
+        existingActivity.setFeatured(updatedActivity.isFeatured());
 
         return activityRepository.save(existingActivity);
     }

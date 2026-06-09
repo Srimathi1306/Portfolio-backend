@@ -23,6 +23,11 @@ public class ActivityController {
         return activityService.getAllActivities();
     }
 
+    @GetMapping("/featured")
+    public List<Activity> getFeaturedActivities() {
+        return activityService.getFeaturedActivities();
+    }
+
     @PostMapping
     public Activity addActivity(@Valid @RequestBody Activity activity) {
         return activityService.addActivity(activity);

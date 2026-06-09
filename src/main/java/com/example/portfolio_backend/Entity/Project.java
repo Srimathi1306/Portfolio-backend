@@ -20,4 +20,6 @@ public class Project {
     private String techStack;
 
     private String category;
+
+    private boolean featured;
 }

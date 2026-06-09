@@ -20,6 +20,10 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
+    public List<Project> getFeaturedProjects() {
+        return projectRepository.findByFeaturedTrue();
+    }
+
     public Project addProject(Project project) {
         return projectRepository.save(project);
     }
@@ -38,6 +42,7 @@ public class ProjectService {
         existingProject.setDescription(updatedProject.getDescription());
         existingProject.setTechStack(updatedProject.getTechStack());
         existingProject.setCategory(updatedProject.getCategory());
+        existingProject.setFeatured(updatedProject.isFeatured());
 
         return projectRepository.save(existingProject);
     }
