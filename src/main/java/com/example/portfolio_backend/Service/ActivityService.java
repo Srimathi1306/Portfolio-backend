@@ -22,6 +22,11 @@ public class ActivityService {
         return activityRepository.findByFeaturedTrueOrderByIdDesc();
     }
 
+    public Activity getActivityById(Long id) {
+        return activityRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Activity not found"));
+    }
+
     public Activity addActivity(Activity activity) {
         return activityRepository.save(activity);
     }

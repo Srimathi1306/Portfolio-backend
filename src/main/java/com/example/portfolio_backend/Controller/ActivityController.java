@@ -28,6 +28,11 @@ public class ActivityController {
         return activityService.getFeaturedActivities();
     }
 
+    @GetMapping("/{id}")
+    public Activity getActivityById(@PathVariable Long id) {
+        return activityService.getActivityById(id);
+    }
+
     @PostMapping
     public Activity addActivity(@Valid @RequestBody Activity activity) {
         return activityService.addActivity(activity);

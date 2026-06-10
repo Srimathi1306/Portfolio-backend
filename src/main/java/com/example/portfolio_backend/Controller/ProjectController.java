@@ -26,6 +26,11 @@ public class ProjectController {
         return projectService.getFeaturedProjects();
     }
 
+    @GetMapping("/{id}")
+    public Project getProjectById(@PathVariable Long id) {
+        return projectService.getProjectById(id);
+    }
+
     @PostMapping
     public Project addProject(@Valid @RequestBody Project project){
         return projectService.addProject(project);
