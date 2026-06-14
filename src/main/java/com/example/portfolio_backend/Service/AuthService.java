@@ -4,6 +4,7 @@ import com.example.portfolio_backend.Entity.AdminUser;
 import com.example.portfolio_backend.Repository.AdminUserRepository;
 import com.example.portfolio_backend.dto.LoginRequest;
 import com.example.portfolio_backend.dto.LoginResponse;
+import com.example.portfolio_backend.security.JwtUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +13,16 @@ public class AuthService {
 
     private final AdminUserRepository adminUserRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     public AuthService(
             AdminUserRepository adminUserRepository,
-            PasswordEncoder passwordEncoder
+            PasswordEncoder passwordEncoder,
+            JwtUtil jwtUtil
     ) {
         this.adminUserRepository = adminUserRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
     public LoginResponse login(LoginRequest loginRequest) {
@@ -34,8 +38,13 @@ public class AuthService {
             throw new RuntimeException("Invalid username or password");
         }
 
+        String token = jwtUtil.generateToken(
+                adminUser.getUsername(),
+                adminUser.getRole()
+        );
+
         return new LoginResponse(
-                "Login successful",
+                token,
                 adminUser.getUsername(),
                 adminUser.getRole()
         );
