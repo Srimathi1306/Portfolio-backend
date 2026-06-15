@@ -3,6 +3,7 @@ package com.example.portfolio_backend.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -12,13 +13,13 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private static final String SECRET =
-            "my-super-secret-key-for-dynamic-portfolio-admin-login-123456";
+    @Value("${jwt.secret}")
+    private String secret;
 
     private static final long EXPIRATION_TIME = 1000 * 60 * 60;
 
     private SecretKey getSigningKey() {
-        return Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
+        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
     public String generateToken(String username, String role) {
